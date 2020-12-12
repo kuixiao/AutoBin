@@ -1,8 +1,8 @@
 package main
 
 import (
-	pb "../protos"
 	"context"
+	pb "github.com/kuixiao/AutoBin/Backend/src/user/protos"
 	"google.golang.org/grpc"
 	"log"
 	"sync"
@@ -171,6 +171,6 @@ func main() {
 	// 返回的client其实是一个NewWasteServiceClient接口对象，通过接口定义的方法就可以调用服务端对应的GRPC服务提供的方法。
 	c := pb.NewUserServiceClient(conn)
 	//testAll(c)
-	test_GetUserScores(c);
+	test_GetUserScores(c)
 }
 

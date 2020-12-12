@@ -6,32 +6,30 @@ import (
 	io "io/ioutil"
 	"log"
 	"os"
-	"sync"
 )
 
 //定义配置文件解析后的结构
 type ConfigInfo struct {
-	UserName  		string `json:userName`
-	Password  		string `json:password`
-	Host      		string `json:host`
-	Port  	  		string `json:port`
-	DbName    		string `json:dbName`
-	GrpcPort		string `json:grpcPort`
-	HttpPort		string `json:httpPort`
-	Verify			string `json:verify`
-	Prefix			string `json:prefix`
-	GrpcEndpoint	string `json:grpcEndpoint`
-	HttpHost		string `json:httpHost`
+	UserName  		string `json:"userName"`
+	Password  		string `json:"password"`
+	Host      		string `json:"host"`
+	Port  	  		string `json:"port"`
+	DbName    		string `json:"dbName"`
+	GrpcPort		string `json:"grpcPort"`
+	HttpPort		string `json:"httpPort"`
+	Verify			string `json:"verify"`
+	Prefix			string `json:"prefix"`
+	GrpcEndpoint	string `json:"grpcEndpoint"`
+	HttpHost		string `json:"httpHost"`
 
-	AppKey			string `json:appKey`		// 百度云应用键值
-	Secret			string `json:secret`		// 百度云应用秘钥
-	AccessToken		string `json:accessToken`	// 调api使用的token
-	ApiUrl			string `json:apiUrl`		// api路径 获取物品名
-	ClassApiUrl		string `json:ClassApiUrl`	// api路径 获取分类
+	AppKey			string `json:"appKey"`		// 百度云应用键值
+	Secret			string `json:"secret"`		// 百度云应用秘钥
+	AccessToken		string `json:"accessToken"`	// 调api使用的token
+	ApiUrl			string `json:"apiUrl"`		// api路径 获取物品名
+	ClassApiUrl		string `json:"ClassApiUrl"`	// api路径 获取分类
 }
 
 var Config ConfigInfo
-var file_locker sync.Mutex //文件锁
 
 // 初始化文件配置
 func init()  {
@@ -45,15 +43,13 @@ func init()  {
 // 加载配置文件
 func LoadConfig(filename string) (ConfigInfo, error) {
 	var conf ConfigInfo
-	file_locker.Lock()
 	data, err := io.ReadFile(getCurrentPath()+filename) //read config file
-	file_locker.Unlock()
 	if err != nil {
 		fmt.Println("read json file error")
 		return conf, err
 	}
-	datajson := []byte(data)
-	err = json.Unmarshal(datajson, &conf)
+	dataJson := []byte(data)
+	err = json.Unmarshal(dataJson, &conf)
 	if err != nil {
 		fmt.Println("unmarshal json file error")
 		return conf, err

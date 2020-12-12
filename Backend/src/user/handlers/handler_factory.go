@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"../db"
-	pb "../protos"
 	"context"
 	"errors"
 	"fmt"
+	"github.com/kuixiao/AutoBin/Backend/src/user/db"
+	pb "github.com/kuixiao/AutoBin/Backend/src/user/protos"
 	"log"
 )
 type UserLogin struct {

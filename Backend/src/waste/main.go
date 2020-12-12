@@ -1,12 +1,12 @@
 package main
 
 import (
-	"./conf"
-	"./handlers"
-	pb "./protos"
 	"context"
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"github.com/kuixiao/AutoBin/Backend/src/waste/conf"
+	"github.com/kuixiao/AutoBin/Backend/src/waste/handlers"
+	pb "github.com/kuixiao/AutoBin/Backend/src/waste/protos"
 	"github.com/rs/cors"
 	"github.com/tmc/grpc-websocket-proxy/wsproxy"
 	"google.golang.org/grpc"
@@ -17,7 +17,7 @@ import (
 	"sync"
 )
 
-func startGrpcServer() (error) {
+func startGrpcServer() error {
 	var config = conf.Config
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s", config.HttpHost + ":" + config.GrpcPort))
 	if err != nil {

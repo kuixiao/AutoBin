@@ -1,9 +1,9 @@
 package main
-import (
-	pb "../user/protos"
-	"fmt"
-)
 
+import (
+	"fmt"
+	pb "github.com/kuixiao/AutoBin/Backend/src/user/protos"
+)
 
 // GetMap 得到map及其所有的key
 // keys : map中所有的key，已排序，从小到大

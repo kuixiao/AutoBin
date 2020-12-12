@@ -2,10 +2,10 @@ package db
 
 import (
 	"fmt"
+	pb "github.com/kuixiao/AutoBin/Backend/src/user/protos"
 	"log"
 	"runtime"
 	"time"
-	pb "../protos"
 )
 
 type User struct {

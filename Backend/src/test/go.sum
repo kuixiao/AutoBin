@@ -1,0 +1,6 @@
+github.com/codegangsta/negroni v1.0.0 h1:+aYywywx4bnKXWvoWtRfJ91vC59NbEhEY03sZjQhbVY=
+github.com/codegangsta/negroni v1.0.0/go.mod h1:v0y3T5G7Y1UlFfyxFn/QLRU4a2EuNau2iZY63YTKWo0=
+github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
+github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
+github.com/kuixiao/AutoBin v0.0.0-20191018053945-f50aa3d12837 h1:8H91/TdC170fw1h7k81DE9NBdMfWFHTs0neP7bzEPWc=
+github.com/kuixiao/AutoBin v0.0.0-20191018053945-f50aa3d12837/go.mod h1:COnx/G0/AWkKbzQdt0T02awDixy/KFU7E42Fn5qFtgM=

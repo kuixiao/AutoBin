@@ -1,7 +1,7 @@
 package main
 
 import (
-	"../waste/conf"
+	"github.com/kuixiao/AutoBin/Backend/src/waste/conf"
 	"io/ioutil"
 	"log"
 	"net/http"

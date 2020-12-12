@@ -16,7 +16,7 @@ func main() {
 	url := "http://api.choviwu.top/garbage/uploadFile"
 	buf := new(bytes.Buffer)	// 图片数据
 	writer := multipart.NewWriter(buf)
-	writer.WriteField("sublib", "1")
+	_ = writer.WriteField("sublib", "1")
 	formFile, err := writer.CreateFormFile("file", "./1.jpg")
 	if err != nil {
 		fmt.Println("Create form file failed: %s\n", err)
@@ -30,9 +30,9 @@ func main() {
 	if err != nil {
 		fmt.Println("Write to form file falied: %s\n", err)
 	}
-	writer.Close() // 发送之前必须调用Close()以写入结尾行
+	_ = writer.Close() // 发送之前必须调用Close()以写入结尾行
 	var imageData io.Reader
-	imageData.Read(buf.Bytes())
+	_, _ = imageData.Read(buf.Bytes())
 	req, _ := http.NewRequest("POST", url, imageData)
 	req.Header.Add("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW")
 	//req.Header.Add("User-Agent", "PostmanRuntime/7.16.3")
