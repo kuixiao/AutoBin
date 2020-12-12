@@ -1,7 +1,7 @@
 {
   "userName":"root",
-  "password":"123456",
-  "host":"127.0.0.1",
+  "password":"aloha@ucloud",
+  "host":"106.75.217.5",
   "port":"3306",
   "dbName": "autobin",
 

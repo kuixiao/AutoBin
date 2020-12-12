@@ -29,9 +29,10 @@ func init(){
 	var err error
 	connArgs := fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		config.UserName,config.Password, config.Host, config.Port,config.DbName )
+	log.Printf("connArgs: %s", connArgs)
 	DB, err = gorm.Open("mysql", connArgs)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("open mysql err: %s", err.Error())
 	}
 	log.Println()
 }

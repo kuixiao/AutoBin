@@ -1,15 +1,16 @@
 package conf
 
 import (
-	"encoding/json"
-	"fmt"
-	io "io/ioutil"
+	"flag"
+	"github.com/spf13/viper"
 	"log"
 	"os"
 )
 
 //定义配置文件解析后的结构
 type ConfigInfo struct {
+	ConfigPath		string
+
 	UserName  		string `json:"userName"`
 	Password  		string `json:"password"`
 	Host      		string `json:"host"`
@@ -33,26 +34,29 @@ var Config ConfigInfo
 
 // 初始化文件配置
 func init()  {
-	conf, err := LoadConfig("\\config.json") //get config struct
+	conf, err := LoadConfig() //get config struct
 	if err != nil {
 		log.Fatal("InitConfig failed:", err.Error())
 	}
 	Config = conf
 }
 
+func (config *ConfigInfo) parseFlag() {
+	flag.StringVar(&config.ConfigPath, "config", "", "config file path")
+	flag.Parse()
+}
+
 // 加载配置文件
-func LoadConfig(filename string) (ConfigInfo, error) {
+func LoadConfig() (ConfigInfo, error) {
 	var conf ConfigInfo
-	data, err := io.ReadFile(getCurrentPath()+filename) //read config file
-	if err != nil {
-		fmt.Println("read json file error")
-		return conf, err
+	conf.parseFlag()
+	log.Printf("conf.ConfigPath: %s", conf.ConfigPath)
+	viper.SetConfigFile(conf.ConfigPath)
+	if err := viper.ReadInConfig(); err != nil {
+		return ConfigInfo{}, err
 	}
-	dataJson := []byte(data)
-	err = json.Unmarshal(dataJson, &conf)
-	if err != nil {
-		fmt.Println("unmarshal json file error")
-		return conf, err
+	if err := viper.Unmarshal(&conf); err != nil {
+		return ConfigInfo{}, err
 	}
 	return conf, nil
 }

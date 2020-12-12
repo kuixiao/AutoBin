@@ -149,7 +149,7 @@ func GetWeekWasteCount(user_id string) (int,map[int]int,error) {
 	sum = len(waste_ids)
 	var type_ids []int
 	dbret = db.Model(&Waste{}).Where("create_time > ? and  waste_id in (?)", weekTime,waste_ids).Pluck("type_id", type_ids)
-	for i :=range type_ids {
+	for i := range type_ids {
 		types[type_ids[i]] += 1
 		sum++
 	}

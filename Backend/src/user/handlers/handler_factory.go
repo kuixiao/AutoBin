@@ -151,7 +151,10 @@ func (*UserServer) GetBinInfo(ctx context.Context, req *pb.UserId) (*pb.BinInfoR
 	if err != nil {
 		return &ret, err
 	}
-	ret.BinInfo = binsInfo
-	ret.Sum = sum
+	for _, binInfo := range binsInfo {
+		ret.BinInfo = append(ret.BinInfo, &binInfo)
+	}
+
+	ret.Sum = int32(sum)
 	return &ret, nil
 }
