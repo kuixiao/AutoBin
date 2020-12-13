@@ -3,6 +3,7 @@ module github.com/kuixiao/AutoBin/Backend/src/user
 go 1.13
 
 require (
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.3
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/jinzhu/gorm v1.9.16
