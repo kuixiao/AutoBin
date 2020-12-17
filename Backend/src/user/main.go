@@ -14,7 +14,6 @@ import (
 	"net"
 	"net/http"
 	"strings"
-	"sync"
 )
 
 func startGrpcServer() error {
@@ -83,24 +82,47 @@ func setFileServer(fileServer, other http.Handler) http.Handler {
 	})
 }
 
-func main(){
-	wg := new (sync.WaitGroup)
-	wg.Add(2)
+func run() error {
+	var config = conf.Config
+	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
 
-	go func() {
-		err := startGrpcServer()
-		if err != nil {
-			log.Fatal("startGrpcServer:", err)
-		}
-		wg.Done()
-	}()
+	mux := runtime.NewServeMux()
+	opts := []grpc.DialOption{grpc.WithInsecure()}
+	err := pb.RegisterUserServiceHandlerFromEndpoint(ctx, mux, config.GrpcEndpoint, opts)
+	if err != nil {
+		return err
+	}
 
-	go func() {
-		err := startHttpServer()
-		if err != nil {
-			log.Fatal("startHttpServer:",err)
-		}
-		wg.Done()
-	}()
-	wg.Wait()
+	return http.ListenAndServe(config.HttpHost + ":" + config.HttpPort, mux)
+
 }
+
+func main() {
+	if err := run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+//func main(){
+//	wg := new (sync.WaitGroup)
+//	wg.Add(2)
+//
+//	go func() {
+//		err := startGrpcServer()
+//		if err != nil {
+//			log.Fatal("startGrpcServer:", err)
+//		}
+//		wg.Done()
+//	}()
+//
+//	go func() {
+//		err := startHttpServer()
+//		if err != nil {
+//			log.Fatal("startHttpServer:",err)
+//		}
+//		wg.Done()
+//	}()
+//	wg.Wait()
+//}

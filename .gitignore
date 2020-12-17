@@ -2,3 +2,6 @@ Pi/protos/__pycache__
 Pi/__pycache__
 Pi/log
 Pi/img
+Backend/src/user/conf/config.json
+Backend/src/user/config.json
+.idea/*

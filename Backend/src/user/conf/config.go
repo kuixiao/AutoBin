@@ -50,7 +50,6 @@ func (config *ConfigInfo) parseFlag() {
 func LoadConfig() (ConfigInfo, error) {
 	var conf ConfigInfo
 	conf.parseFlag()
-	log.Printf("conf.ConfigPath: %s", conf.ConfigPath)
 	viper.SetConfigFile(conf.ConfigPath)
 	if err := viper.ReadInConfig(); err != nil {
 		return ConfigInfo{}, err
